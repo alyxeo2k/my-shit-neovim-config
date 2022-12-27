@@ -1,4 +1,6 @@
 local keymap = vim.keymap
+vim.g.gui_font_default_size = 8
+vim.o.guifont = "Source Code Pro"
 -- Setting the <leader> key
 vim.g.mapleader = " "
 -- Saving
@@ -42,3 +44,7 @@ keymap.set("t", "<M-1>", "<C-\\><C-n><C-w>l:ToggleTerm<CR>")
 keymap.set("n", "<leader>ap", function()
 	require'telescope'.extensions.projects.projects{}
 end)
+-- For zooming in and out and reseting zoom in neovide
+keymap.set({"n", "i"}, "<C-l>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+keymap.set({"n", "i"}, "<C-k>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
+keymap.set({"n", "i"}, "<C-j>", ":lua vim.g.neovide_scale_factor = 1<CR>")
