@@ -6,7 +6,14 @@ return require('packer').startup({function(use)
 
   use {
    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-   requires = { {'nvim-lua/plenary.nvim'} }
+   requires = { {'nvim-lua/plenary.nvim'} },
+   config = function() 
+   	require('telescope').setup({
+		defaults = {
+			file_ignore_patterns = { "Windows" }
+		}
+	})
+   end
   }
 
   use { 'williamboman/mason.nvim' }
@@ -289,7 +296,30 @@ alpha.setup(config)
   requires = {
     'nvim-tree/nvim-web-devicons', -- optional, for file icons
   },
-  tag = 'nightly' -- optional, updated every week. (see issue #1193) 
+  tag = 'nightly', -- optional, updated every week. (see issue #1193) 
+  config = function ()
+  	require'nvim-tree'.setup{
+		view = {
+			width = 30,
+			height = 30,
+			float = {
+				enable = true,
+				open_win_config = {
+					relative = "editor",
+					width = 30,
+					height = 30,
+				}
+			}
+		},
+		sync_root_with_cwd = true,
+  		respect_buf_cwd = true,
+  		update_focused_file = {
+    			enable = true,
+    			update_root = true,
+			update_cwd = true
+  		},
+	}
+  end
   }
 
   use {'nvim-telescope/telescope-fzf-native.nvim'}
@@ -325,22 +355,14 @@ alpha.setup(config)
 	require("project_nvim").setup {
 		patterns = { "=projects", "=nvim" }
 	}
-  	require("nvim-tree").setup({
-  		sync_root_with_cwd = true,
-  		respect_buf_cwd = true,
-  		update_focused_file = {
-    			enable = true,
-    			update_root = true
-  		},
-        })  
-
    end
   }
 
   use { 'drzel/vim-gui-zoom' }
 
-  use { 'WhoIsSethDaniel/mason-tool-installer.nvim',
-  }
+  use { 'WhoIsSethDaniel/mason-tool-installer.nvim' }
+
+  use { 'smithbm2316/centerpad.nvim' }
 end,
 config = {
 	display = {
