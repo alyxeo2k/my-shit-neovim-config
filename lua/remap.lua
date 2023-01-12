@@ -11,9 +11,10 @@ keymap.set("n", "<C-q>", ":bd<CR>")
 keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>")
 keymap.set("n", "<S-l>", ":BufferLineCycleNext<CR>")
 -- Opening Nvim-tree
-keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
--- Run PackerSync
-keymap.set("n", "<leader>ps", ":PackerSync<CR>")
+keymap.set("n", "<leader>e", ":Neotree toggle float<CR>")
+-- My common packer commands ( for quality of life )
+keymap.set("n", "<leader>ps", ":Lazy sync<CR>")
+keymap.set("n", "<leader>pa", ":so<CR> | :Lazy sync<CR>")
 -- Telescope bindings
 keymap.set("n", "<leader>ff", ":Telescope find_files<CR>")
 keymap.set("n", "<leader>fh", ":Telescope oldfiles<CR>")
@@ -38,8 +39,8 @@ keymap.set("n", "<M-l>", "<C-w>l")
 keymap.set("n", "<M-1>", ":ToggleTerm direction=horizontal<CR>")
 keymap.set("n", "<M-2>", ":ToggleTerm direction=vertical size=50<CR>")
 keymap.set("n", "<M-3>", ":ToggleTerm direction=float<CR>")
--- To hide and re-focus last buffer
-keymap.set("t", "<M-1>", "<C-\\><C-n><C-w>l:ToggleTerm<CR>")
+-- To hide the terminal
+keymap.set("t", "<M-1>", "<C-\\><C-n><C-w>l<CR>")
 -- Show all projects
 keymap.set("n", "<leader>ap", function()
 	require'telescope'.extensions.projects.projects{}
@@ -48,3 +49,25 @@ end)
 keymap.set({"n", "i"}, "<C-l>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
 keymap.set({"n", "i"}, "<C-k>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
 keymap.set({"n", "i"}, "<C-j>", ":lua vim.g.neovide_scale_factor = 1<CR>")
+-- move selected text
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- improved half page jumping
+keymap.set("n", "<C-d>", "<C-d>zz")
+keymap.set("n", "<C-u>", "<C-u>zz")
+-- improved pattern search hopping
+keymap.set("n", "n", "nzzzv")
+keymap.set("n", "N", "Nzzzv")
+-- preserve copied text
+keymap.set("x", "<leader>p", "\"_dP")
+-- be able to copy then paste out of neovim
+keymap.set("n", "<leader>y", "\"+y")
+keymap.set("v", "<leader>y", "\"+y")
+keymap.set("n", "<leader>Y", "\"+Y")
+-- don't copy cut text
+keymap.set("n", "<leader>d", "\"_d")
+keymap.set("v", "<leader>d", "\"_d")
+-- no more Q
+keymap.set("n", "Q", "<nop>")
+-- super useful find & replace word under cursor
+keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
